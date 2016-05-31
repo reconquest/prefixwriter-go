@@ -5,8 +5,8 @@ import (
 	"io"
 )
 
-// PrefixWriter writes specified data, prepending prefix to each new line.
-type PrefixWriter struct {
+// Writer writes specified data, prepending prefix to each new line.
+type Writer struct {
 	backend io.WriteCloser
 	prefix  string
 
@@ -14,19 +14,19 @@ type PrefixWriter struct {
 	lineIncomplete bool
 }
 
-// New creates new PrefixWriter, that will use `writer` as backend
+// New creates new Writer, that will use `writer` as backend
 // and will prepend `prefix` to each line.
-func New(writer io.WriteCloser, prefix string) *PrefixWriter {
-	return &PrefixWriter{
+func New(writer io.WriteCloser, prefix string) *Writer {
+	return &Writer{
 		backend: writer,
 		prefix:  prefix,
 	}
 }
 
-// Writer writes data into PrefixWriter.
+// Writer writes data into Writer.
 //
 // Signature matches with io.Writer's Write().
-func (writer *PrefixWriter) Write(data []byte) (int, error) {
+func (writer *Writer) Write(data []byte) (int, error) {
 	var (
 		reader         = bytes.NewBuffer(data)
 		eofEncountered = false
@@ -66,6 +66,6 @@ func (writer *PrefixWriter) Write(data []byte) (int, error) {
 // Close closes underlying backend writer.
 //
 // Signature matches with io.WriteCloser's Close().
-func (writer *PrefixWriter) Close() error {
+func (writer *Writer) Close() error {
 	return writer.backend.Close()
 }

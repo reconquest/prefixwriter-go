@@ -23,15 +23,15 @@ func TestNew_ReturnsWriterWithPrefix(t *testing.T) {
 	test.Equal("prefix", writer.prefix)
 }
 
-func TestPrefixWriter_WriteNothingAtEmptyData(t *testing.T) {
+func TestWriter_WriteNothingAtEmptyData(t *testing.T) {
 	testWriter(t, nil, "prefix", "", "")
 }
 
-func TestPrefixWriter_WriteFirstByteWithPrefix(t *testing.T) {
+func TestWriter_WriteFirstByteWithPrefix(t *testing.T) {
 	testWriter(t, nil, "output: ", "1", "output: 1")
 }
 
-func TestPrefixWriter_NotInsertsPrefixOnTwoWritesWithoutNewline(t *testing.T) {
+func TestWriter_NotInsertsPrefixOnTwoWritesWithoutNewline(t *testing.T) {
 	var writer io.WriteCloser
 
 	writer = testWriter(t, nil, "output: ", "1", "output: 1")
@@ -40,7 +40,7 @@ func TestPrefixWriter_NotInsertsPrefixOnTwoWritesWithoutNewline(t *testing.T) {
 	_ = testWriter(t, writer, "output:", "4", "output: 123\noutput: 4")
 }
 
-func TestPrefixWriter_AddsPrefixOnEachNewLine(t *testing.T) {
+func TestWriter_AddsPrefixOnEachNewLine(t *testing.T) {
 	var writer io.WriteCloser
 
 	writer = testWriter(t, nil, "p: ", "1\n", "p: 1\n")
@@ -48,7 +48,7 @@ func TestPrefixWriter_AddsPrefixOnEachNewLine(t *testing.T) {
 	_ = testWriter(t, writer, "p:", "3\n", "p: 1\np: 2\np: 3\n")
 }
 
-func TestPrefixWriter_InsertsPrefixWhenNewlineComesFirst(t *testing.T) {
+func TestWriter_InsertsPrefixWhenNewlineComesFirst(t *testing.T) {
 	var writer io.WriteCloser
 
 	writer = testWriter(t, nil, "p: ", "1", "p: 1")
@@ -73,7 +73,7 @@ func testWriter(
 	test.Nil(err)
 	test.Equal(len(data), written)
 
-	buffer := writer.(*PrefixWriter).backend.(nopCloser).Buffer
+	buffer := writer.(*Writer).backend.(nopCloser).Buffer
 
 	test.Equal(expected, buffer.String())
 

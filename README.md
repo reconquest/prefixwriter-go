@@ -7,11 +7,11 @@ to Write is done for writing that line.
 # Behavior
 ```
 New           Returns Writer With Prefix
-PrefixWriter  Write Nothing At Empty Data
-PrefixWriter  Write First Byte With Prefix
-PrefixWriter  Not Inserts Prefix On Two Writes Without Newline
-PrefixWriter  Adds Prefix On Each New Line
-PrefixWriter  Inserts Prefix When Newline Comes First
+Writer  Write Nothing At Empty Data
+Writer  Write First Byte With Prefix
+Writer  Not Inserts Prefix On Two Writes Without Newline
+Writer  Adds Prefix On Each New Line
+Writer  Inserts Prefix When Newline Comes First
 ```
 
 Generated with [loverage](https://github.com/kovetskiy/loverage).
