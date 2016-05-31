@@ -16,10 +16,10 @@ func (closer nopCloser) Close() error {
 	return nil
 }
 
-func TestNewPrefixWriter_ReturnsWriterWithPrefix(t *testing.T) {
+func TestNew_ReturnsWriterWithPrefix(t *testing.T) {
 	test := assert.New(t)
 
-	writer := NewPrefixWriter(nil, "prefix")
+	writer := New(nil, "prefix")
 	test.Equal("prefix", writer.prefix)
 }
 
@@ -66,7 +66,7 @@ func testWriter(
 	test := assert.New(t)
 
 	if writer == nil {
-		writer = NewPrefixWriter(nopCloser{&bytes.Buffer{}}, prefix)
+		writer = New(nopCloser{&bytes.Buffer{}}, prefix)
 	}
 
 	written, err := writer.Write([]byte(data))

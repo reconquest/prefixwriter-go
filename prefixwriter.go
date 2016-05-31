@@ -14,9 +14,9 @@ type PrefixWriter struct {
 	lineIncomplete bool
 }
 
-// NewPrefixWriter creates new PrefixWriter, that will use `writer` as backend
+// New creates new PrefixWriter, that will use `writer` as backend
 // and will prepend `prefix` to each line.
-func NewPrefixWriter(writer io.WriteCloser, prefix string) *PrefixWriter {
+func New(writer io.WriteCloser, prefix string) *PrefixWriter {
 	return &PrefixWriter{
 		backend: writer,
 		prefix:  prefix,
