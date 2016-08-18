@@ -18,4 +18,4 @@ Generated with [loverage](https://github.com/kovetskiy/loverage).
 
 # Documentation
 
-See reference at [godoc.org](http://godoc.org/github.com/reconquest/go-prefixwriter).
+See reference at [godoc.org](http://godoc.org/github.com/reconquest/prefixwriter-go).
